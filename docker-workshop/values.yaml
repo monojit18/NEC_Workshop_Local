@@ -1,0 +1,41 @@
+# Default values for foo.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+containers:
+- name: docker-workshop
+- name: another-docker-workshop
+    
+images:
+- image:
+    repository: workshopregistry.azurecr.io/dockerworkshopapp
+    tag: v2.5.3
+    pullPolicy: IfNotPresent
+  
+- image:
+    repository: workshopregistry.azurecr.io/anotherdockerworkshopapp
+    tag: v2.1.8
+    pullPolicy: IfNotPresent
+  
+imagePullSecrets:
+- name: workshopregcred
+
+service:
+  name: docker-workshop
+  type: NodePort
+  port: 7005
+
+resources:
+   limits:
+    cpu: "0.5"
+    memory: 256Mi
+   requests:
+    cpu: "0.25"
+    memory: 128Mi
+
+selector:
+    app: docker_workshop_app 
+    
+
