@@ -35,5 +35,5 @@ spec:
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
       imagePullSecrets:
-      - name: workshopregcred
+    {{- toYaml .Values.imagePullSecrets }}
         

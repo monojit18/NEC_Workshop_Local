@@ -1,0 +1,34 @@
+version: "3.5"
+services:
+    docker_workshop:
+        image: workshopregistry.azurecr.io/dockerworkshopapp:v2.4.9      
+        deploy:
+            replicas: 1
+            resources:
+                limits:
+                    cpus: "0.25"
+                    memory: "50M"
+            restart_policy:
+                condition: "on-failure"
+        ports:
+            - "9005:7005"
+        networks:
+            - default
+
+    another_docker_workshop:
+        image: workshopregistry.azurecr.io/anotherdockerworkshopapp:v2.1.7        
+        deploy:
+            replicas: 1
+            resources:
+                limits:
+                    cpus: "0.25"
+                    memory: "50M"
+            restart_policy:
+                condition: "on-failure"
+        ports:
+            - "7007"            
+        networks:
+            - default
+networks:
+    default:
+        name: workshopdockernetwork
